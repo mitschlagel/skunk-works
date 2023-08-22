@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5e2ff825-ad55-4867-bcb3-995e04269372"
+      }
+    },
+    "owner": "mitschlagel"
   }
 }
