@@ -24,8 +24,15 @@ function AccountsView({ navigation }) {
 }
 
 function AccountSummaryView() {
+  const insets = useSafeAreaInsets()
   return (
-    <View style={styles}>
+    <View style={[styles.container, {
+      paddingTop: insets.top,
+      paddingBottom: insets.bottom,
+      paddingLeft: insets.left,
+      paddingRight: insets.right
+    },
+  ]}>
       <Text>Account Summary View</Text>
     </View>
   )
@@ -40,8 +47,8 @@ export default function App() {
         
         <NavigationContainer>
           <Stack.Navigator initialRouteName='Accounts'>
-            <Stack.Screen name="Accounts" component={AccountsView} options={navigationOptions} />
-            <Stack.Screen name="Summary" component={AccountSummaryView} />
+            <Stack.Screen name="Accounts" component={AccountsView} options={accountsNavigationOptions} />
+            <Stack.Screen name="Summary" component={AccountSummaryView} options={summaryNavigationOptions}/>
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>
@@ -50,7 +57,7 @@ export default function App() {
   );
 }
 
-const navigationOptions = {
+const accountsNavigationOptions = {
   title: "Accounts",
   headerLargeTitle: true,
   headerStyle: {
@@ -59,12 +66,16 @@ const navigationOptions = {
   headerTintColor: '#fff'
 }
 
+const summaryNavigationOptions = {
+  title: "Summary",
+  headerStyle: {
+    backgroundColor: '#006341'
+  },
+  headerTintColor: '#fff'
+}
+
 
 const styles = StyleSheet.create({
-  navigationHeader: {
-    color: 'white',
-    
-  },
   container: {
     flex: 1,
     alignItems: 'center',
