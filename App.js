@@ -2,8 +2,20 @@ import { Button, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-function AccountsView({ navigation }) {
+const AccountsStack = () => {
+  const Stack = createNativeStackNavigator()
+  return (
+    <Stack.Navigator initialRouteName='Accounts'>
+      <Stack.Screen name="Accounts" component={AccountsView} options={navigationOptions(this.name, true)} />
+      <Stack.Screen name="Summary" component={AccountSummaryView} options={navigationOptions(this.name, false)}/>
+    </Stack.Navigator>
+    
+  )
+}
+
+const AccountsView = ({ navigation }) => {
   const insets = useSafeAreaInsets()
   return (
     <View style={[styles.container, {
@@ -13,7 +25,8 @@ function AccountsView({ navigation }) {
         paddingRight: insets.right
       },
     ]}>
-      <StatusBar barStyle="light-content" />
+      
+      
       <Text>Accounts View</Text>
       <Button 
       title="Go to Summary"
@@ -23,7 +36,7 @@ function AccountsView({ navigation }) {
   )
 }
 
-function AccountSummaryView() {
+const AccountSummaryView = () => {
   const insets = useSafeAreaInsets()
   return (
     <View style={[styles.container, {
@@ -38,42 +51,59 @@ function AccountSummaryView() {
   )
 }
 
-const Stack = createNativeStackNavigator()
+const PaySendStack = () => {
+  const Stack = createNativeStackNavigator()
+  return (
+    <Stack.Navigator initialRouteName='PaySendView'>
+      <Stack.Screen name="Pay/Send" component={PaySendView} options={navigationOptions(this.name, true)} />
+    </Stack.Navigator>
+  )
+}
+
+const PaySendView = () => {
+  const insets = useSafeAreaInsets()
+  return (
+    <View style={[styles.container, {
+      paddingTop: insets.top,
+      paddingBottom: insets.bottom,
+      paddingLeft: insets.left,
+      paddingRight: insets.right
+    },
+  ]}>
+      <Text>Pay/Send View</Text>
+    </View>
+  )
+}
+
+const Tab = createBottomTabNavigator()
+
+const TabBar = () => {
+  return (
+    <Tab.Navigator initialRouteName='Accounts' screenOptions={{navigationOptions}}>
+      <Tab.Screen name="Accounts" component={AccountsStack} options={{headerShown: false}} />
+      <Tab.Screen name="Pay/Send" component={PaySendStack} options={{headerShown: false}} />
+    </Tab.Navigator>
+  )
+}
 
 export default function App() {
-  StatusBar.setBarStyle('dark-content', true)
   return (
-      <SafeAreaProvider>
-        
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName='Accounts'>
-            <Stack.Screen name="Accounts" component={AccountsView} options={accountsNavigationOptions} />
-            <Stack.Screen name="Summary" component={AccountSummaryView} options={summaryNavigationOptions}/>
-          </Stack.Navigator>
-        </NavigationContainer>
-      </SafeAreaProvider>
-      
-    
+    <NavigationContainer>
+      <StatusBar barStyle="light-content" />
+      <TabBar />
+    </NavigationContainer>
   );
 }
 
-const accountsNavigationOptions = {
-  title: "Accounts",
-  headerLargeTitle: true,
-  headerStyle: {
-    backgroundColor: '#006341'
-  },
-  headerTintColor: '#fff'
+const navigationOptions = (title, headerLargeTitle) => {
+  return { title: title,
+    headerLargeTitle: headerLargeTitle,
+    headerStyle: {
+      backgroundColor: '#006341'
+    },
+    headerTintColor: '#fff'
+  }
 }
-
-const summaryNavigationOptions = {
-  title: "Summary",
-  headerStyle: {
-    backgroundColor: '#006341'
-  },
-  headerTintColor: '#fff'
-}
-
 
 const styles = StyleSheet.create({
   container: {
