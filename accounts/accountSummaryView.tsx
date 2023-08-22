@@ -1,8 +1,5 @@
-import { Button, StatusBar, StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import styles from '../styles/styles';
 

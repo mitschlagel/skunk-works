@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
