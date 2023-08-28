@@ -3,7 +3,12 @@ import { NavigationContainer } from '@react-navigation/native'
 
 import MainTabBar from './main/mainTabBar';
 
-export default function App() {
+import { default as storybook } from './.storybook';
+
+const STORYBOOK_ENABLED = true;
+const AppEntry = STORYBOOK_ENABLED ? storybook : App;
+
+function App() {
   return (
     <NavigationContainer>
       <StatusBar barStyle="light-content" />
@@ -11,6 +16,8 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+export default AppEntry
 
 
 
