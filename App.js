@@ -5,7 +5,7 @@ import MainTabBar from './main/mainTabBar';
 
 import { default as storybook } from './.storybook';
 
-const STORYBOOK_ENABLED = true;
+const STORYBOOK_ENABLED = false;
 const AppEntry = STORYBOOK_ENABLED ? storybook : App;
 
 function App() {
